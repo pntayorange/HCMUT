@@ -1,0 +1,49 @@
+/*
+struct ListNode {
+    int val;
+    ListNode *left;
+    ListNode *right;
+    ListNode(int x = 0, ListNode *l = nullptr, ListNode* r = nullptr) : val(x), left(l), right(r) {}
+};
+*/
+
+ListNode* reverse(ListNode* head, int a, int b) {
+    //To Do
+        if (!head || a == b) return head;  // No need to reverse if the list is empty or a equals b
+
+    ListNode *prev = nullptr, *curr = head;
+    int pos = 1;
+
+    // Step 1: Traverse to the node at position a
+    while (curr && pos < a) {
+        prev = curr;
+        curr = curr->right;
+        pos++;
+    }
+
+    // `curr` is now at position a
+    ListNode *con = prev;      // Connection node to connect to the reversed part
+    ListNode *tail = curr;     // Tail of the reversed segment
+
+    // Step 2: Reverse the segment from a to b
+    ListNode *next = nullptr;
+    while (curr && pos <= b) {
+        next = curr->right;  // Store the next node
+        curr->right = prev;  // Reverse the link
+        curr->left = next;   // Maintain the left pointer
+        prev = curr;         // Move `prev` one step forward
+        curr = next;         // Move `curr` to the next node
+        pos++;
+    }
+
+    // Step 3: Reconnect the reversed segment with the original list
+    if (con) {
+        con->right = prev;  // Connect the node before `a` to the new head of reversed segment
+    } else {
+        head = prev;        // If `a` is 1, update the head of the list
+    }
+    tail->right = curr;     // Connect the tail of the reversed segment to the node after `b`
+    
+    return head;            // Return the new head of the list
+
+}
