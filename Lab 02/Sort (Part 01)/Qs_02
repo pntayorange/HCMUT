@@ -1,0 +1,30 @@
+template <class T>
+void Sorting<T>::selectionSort(T *start, T *end)
+{
+    int size = end - start;
+    for (int i = 0; i < size - 1; i++)
+    {
+        // Assume the minimum is the first element
+        int minIndex = i;
+
+        // Find the index of the minimum element
+        for (int j = i + 1; j < size; j++)
+        {
+            if (start[j] < start[minIndex])
+            {
+                minIndex = j; // Update the index of the minimum element
+            }
+        }
+
+        // Swap the found minimum element with the first element
+        if (minIndex != i) // Only swap if the minimum is not the current element
+        {
+            T temp = start[i];
+            start[i] = start[minIndex];
+            start[minIndex] = temp;
+        }
+
+        // Print the array after each selection
+        printArray(start, end);
+    }
+}
