@@ -1,0 +1,25 @@
+LLNode* rotateLinkedList(LLNode* head, int k) {
+   if (head == nullptr || k <= 0) {
+        return head;
+    }
+    int length = 1;
+    LLNode* tail = head;
+    while (tail->next != nullptr) {
+        tail = tail->next;
+        length++;
+    }
+    k = k % length;
+    if (k == 0) {
+        return head; 
+    }
+    int new_head_position = length - k;
+    LLNode* new_tail = head;
+    for (int i = 1; i < new_head_position; i++) {
+        new_tail = new_tail->next;
+    }
+    LLNode* new_head = new_tail->next;
+    new_tail->next = nullptr;
+    tail->next = head;
+
+    return new_head;
+}

@@ -1,0 +1,13 @@
+LLNode* reverseLinkedList(LLNode* head) {
+    LLNode* cur = head;
+    LLNode* prev = NULL;
+    LLNode* nxt = NULL;
+    while (cur != NULL){
+        nxt = cur -> next;
+        cur -> next = prev;
+        prev = cur;
+        cur = nxt;
+    }
+    head = prev;
+    return head;
+}
