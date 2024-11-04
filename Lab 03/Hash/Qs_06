@@ -1,0 +1,29 @@
+
+int pairMatching(std::vector<int>& nums, int target) {
+    std::unordered_map<int, int> countMap;
+    int pairs = 0;
+
+    // Populate the frequency map
+    for (int num : nums) {
+        countMap[num]++;
+    }
+
+    for (int num : nums) {
+        int complement = target - num;
+
+        // Check if both the number and its complement are available for pairing
+        if (countMap[num] > 0 && countMap[complement] > 0) {
+            // Avoid pairing the same number with itself unless there are two or more
+            if (num == complement && countMap[num] > 1) {
+                pairs++;
+                countMap[num] -= 2;  // Use two instances of the same number
+            } else if (num != complement) {
+                pairs++;
+                countMap[num]--;
+                countMap[complement]--;
+            }
+        }
+    }
+
+    return pairs;
+}
