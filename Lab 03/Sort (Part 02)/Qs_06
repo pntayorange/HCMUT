@@ -1,0 +1,37 @@
+string minDiffPairs(int* arr, int n){
+    // STUDENT ANSWER
+    if (n < 2) return "";
+
+    sort(arr, arr + n);
+
+    int minDiff = numeric_limits<int>::max();
+
+    for (int i = 1; i < n; i++) {
+        minDiff = min(minDiff, arr[i] - arr[i - 1]);
+    }
+
+    int pairCount = 0;
+    for (int i = 1; i < n; i++) {
+        if (arr[i] - arr[i - 1] == minDiff) {
+            pairCount++;
+        }
+    }
+
+    int pairs[pairCount][2];
+    int index = 0;
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i] - arr[i - 1] == minDiff) {
+            pairs[index][0] = arr[i - 1];
+            pairs[index][1] = arr[i];
+            index++;
+        }
+    }
+
+    ostringstream oss;
+    for (int i = 0; i < pairCount; i++) {
+        if (i > 0) oss << ", ";
+        oss << "(" << pairs[i][0] << ", " << pairs[i][1] << ")";
+    }
+    return oss.str();
+}
