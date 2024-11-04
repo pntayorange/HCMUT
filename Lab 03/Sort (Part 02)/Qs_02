@@ -1,0 +1,52 @@
+static void merge(T* left, T* middle, T* right){
+    /*TODO*/
+    int leftSize = middle - left + 1;
+    int rightSize = right - middle;
+
+    T* leftArray = new T[leftSize];
+    T* rightArray = new T[rightSize];
+
+    for (int i = 0; i < leftSize; i++)
+        leftArray[i] = left[i];
+    for (int j = 0; j < rightSize; j++)
+        rightArray[j] = middle[1 + j];
+
+    int i = 0, j = 0;
+    T* k = left;
+
+    while (i < leftSize && j < rightSize) {
+        if (leftArray[i] <= rightArray[j]) {
+            *k = leftArray[i];
+            i++;
+        } else {
+            *k = rightArray[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < leftSize) {
+        *k = leftArray[i];
+        i++;
+        k++;
+    }
+
+    while (j < rightSize) {
+        *k = rightArray[j];
+        j++;
+        k++;
+    }
+
+    delete[] leftArray;
+    delete[] rightArray;
+    Sorting::printArray(left, right);
+}
+static void mergeSort(T* start, T* end){
+    /*TODO*/
+    if (start < end) {
+        T* middle = start + (end - start) / 2;
+        mergeSort(start, middle);
+        mergeSort(middle + 1, end);
+        merge(start, middle, end);
+    }
+}
