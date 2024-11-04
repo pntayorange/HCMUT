@@ -1,0 +1,23 @@
+int maxNumberOfPeople(vector<int>& rooms, vector<int>& people, int k) {
+    sort(rooms.begin(), rooms.end());
+    sort(people.begin(), people.end());
+
+    int personIndex = 0, roomIndex = 0, count = 0;
+
+    while (personIndex < people.size() && roomIndex < rooms.size()) {
+        int desiredSize = people[personIndex];
+        int roomSize = rooms[roomIndex];
+
+        if (roomSize >= desiredSize - k && roomSize <= desiredSize + k) {
+            count++;
+            personIndex++;
+            roomIndex++;
+        } else if (roomSize < desiredSize - k) {
+            roomIndex++;
+        } else {
+            personIndex++;
+        }
+    }
+
+    return count;
+}
