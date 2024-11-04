@@ -1,0 +1,34 @@
+V remove(int key) {
+/*
+        An index need to find by using the hash function,
+        then find the Entry of this index
+            
+        Check if the key already exists. If yes, remove the key from the table
+        
+        If the key doesn't exist, print Key not found
+    
+    */
+
+    int index = hashFunction(key, capacity);
+    Entry* entry = table[index];
+    Entry* prev = nullptr;
+
+    while (entry != nullptr) {
+        if (entry->key == key) {  // Key found
+            V value = entry->value;  // Store value to return later
+            if (prev == nullptr) { // Removing head of the list
+                table[index] = entry->next;
+            } else {
+                prev->next = entry->next;
+            }
+            delete entry;
+            count--;
+            return value;  // Return the removed value
+        }
+        prev = entry;
+        entry = entry->next;
+    }
+    throw std::out_of_range("Key not found");  // If key not found
+
+
+}
