@@ -1,0 +1,26 @@
+int longestPathSumHelper(BTNode* node, int& maxLen, int& maxSum) {
+    if (node == nullptr) return 0;
+    
+    int leftLen = 0, leftSum = 0;
+    int rightLen = 0, rightSum = 0;
+    
+    leftSum = longestPathSumHelper(node->left, leftLen, leftSum);
+    rightSum = longestPathSumHelper(node->right, rightLen, rightSum);
+    
+    int currentLen = 1 + max(leftLen, rightLen);
+    int currentSum = node->val + (leftLen > rightLen ? leftSum : (leftLen < rightLen ? rightSum : max(leftSum, rightSum)));
+    
+    if (currentLen > maxLen || (currentLen == maxLen && currentSum > maxSum)) {
+        maxLen = currentLen;
+        maxSum = currentSum;
+    }
+    
+    return currentSum;
+}
+int longestPathSum(BTNode* root) {
+int maxLen = 0;
+    int maxSum = 0;
+    longestPathSumHelper(root, maxLen, maxSum);
+    return maxSum;
+}
+

@@ -1,0 +1,22 @@
+int kthSmallest(BSTNode* root, int k) {
+    // STUDENT ANSWER
+       stack<BSTNode*> s;
+    BSTNode* curr = root;
+
+    while (curr || !s.empty()) {
+        while (curr) {
+            s.push(curr);
+            curr = curr->left;
+        }
+
+        curr = s.top();
+        s.pop();
+        k--;
+        if (k == 0) {
+            return curr->val;
+        }
+        curr = curr->right;
+    }
+
+    return -1; // k is invalid
+}

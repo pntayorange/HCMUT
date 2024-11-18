@@ -1,0 +1,44 @@
+template <class T>
+void Heap<T>::push(T item)
+{
+    ensureCapacity(count + 1);
+    elements[count] = item;
+    reheapUp(count);
+    count++;
+}
+
+template <class T>
+void Heap<T>::ensureCapacity(int minCapacity)
+{
+    if (minCapacity <= capacity)
+    {
+        return;
+    }
+
+    T *oldElements = elements;
+    capacity = max(capacity * 2, minCapacity);
+    elements = new T[capacity];
+
+    for (int i = 0; i < count; i++)
+    {
+        elements[i] = oldElements[i];
+    }
+
+    delete[] oldElements;
+}
+
+template <class T>
+void Heap<T>::reheapUp(int position)
+{
+    while (position > 0)
+    {
+        int parent = (position - 1) / 2;
+        if (elements[position] <= elements[parent])
+            {
+                break;
+            }
+
+        swap(elements[position], elements[parent]);
+        position = parent;
+    }
+}

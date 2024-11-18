@@ -1,0 +1,36 @@
+vector<int> levelAlterTraverse(BSTNode* root) {
+    // STUDENT ANSWER
+    vector<int> result;
+    if (!root) return result; // If the tree is empty, return an empty result
+
+    queue<BSTNode*> q; // Queue for level order traversal
+    bool leftToRight = true; // Flag to alternate the traversal direction
+
+    q.push(root);
+
+    while (!q.empty()) {
+        int levelSize = q.size(); // Number of nodes at the current level
+        vector<int> currentLevel(levelSize);
+
+        for (int i = 0; i < levelSize; ++i) {
+            BSTNode* node = q.front();
+            q.pop();
+
+            // Decide the position based on the traversal direction
+            int index = leftToRight ? i : (levelSize - 1 - i);
+            currentLevel[index] = node->val;
+
+            // Add children to the queue
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
+        }
+
+        // Add the current level to the result
+        result.insert(result.end(), currentLevel.begin(), currentLevel.end());
+
+        // Toggle the direction for the next level
+        leftToRight = !leftToRight;
+    }
+
+    return result;
+}

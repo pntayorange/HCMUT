@@ -1,0 +1,19 @@
+BTNode* findLowestCommonAncestor(BTNode* root, int a, int b) {
+    if (!root || root->val == a || root->val == b) {
+        return root;
+    }
+    
+    BTNode* left = findLowestCommonAncestor(root->left, a, b);
+    BTNode* right = findLowestCommonAncestor(root->right, a, b);
+
+    if (left && right) {
+        return root;
+    }
+
+    return left ? left : right;
+}
+
+int lowestAncestor(BTNode* root, int a, int b) {
+    BTNode* lca = findLowestCommonAncestor(root, a, b);
+    return lca ? lca->val : -1;
+}

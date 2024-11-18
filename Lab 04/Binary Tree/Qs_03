@@ -1,0 +1,11 @@
+//Helping functions
+int sumOfLeafs(Node* node) {
+    if (node == nullptr) return 0; // Base case: empty node
+    if (node->pLeft == nullptr && node->pRight == nullptr) return node->value; // Leaf node
+    return sumOfLeafs(node->pLeft) + sumOfLeafs(node->pRight); // Recursive sum of left and right subtrees
+}
+
+int sumOfLeafs(){
+    //TODO
+    return sumOfLeafs(root);
+}

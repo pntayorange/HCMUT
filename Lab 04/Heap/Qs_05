@@ -1,0 +1,47 @@
+//Helping functions go here
+static void heapify(T *start, T *end, int n, int i)
+{
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    // Compare left child with root
+    if (left < n && start[left] > start[largest])
+    {
+        largest = left;
+    }
+
+    // Compare right child with largest so far
+    if (right < n && start[right] > start[largest])
+    {
+        largest = right;
+    }
+
+    // If largest is not root
+    if (largest != i)
+    {
+        swap(start[i], start[largest]);
+        // Recursively heapify the affected sub-tree
+        heapify(start, end, n, largest);
+    }
+}
+static void heapSort(T *start, T *end)
+{
+    // TODO
+    long size = end - start;
+    // Build max heap
+    for (int i = size / 2 - 1; i >= 0; i--)
+    {
+        heapify(start, end, size, i);
+    }
+
+    // One by one extract elements
+    for (int i = size - 1; i > 0; i--)
+    {
+        // Move current root to end
+        swap(start[0], start[i]);
+        // Call heapify on the reduced heap
+        heapify(start, end, i, 0);
+    }
+    Sorting<T>::printArray(start, end);
+}

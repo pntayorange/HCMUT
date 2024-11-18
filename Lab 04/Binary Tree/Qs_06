@@ -1,0 +1,23 @@
+void calculateDigitPathSum(BTNode* node, long long currentNumber, long long& totalSum, const int MOD) {
+    if (!node) return;
+
+    // Update the current number based on the node value
+    currentNumber = (currentNumber * 10 + node->val) % MOD;
+
+    // If it is a leaf node, add the number to the total sum
+    if (!node->left && !node->right) {
+        totalSum = (totalSum + currentNumber) % MOD;
+        return;
+    }
+
+    // Recur for left and right subtrees
+    calculateDigitPathSum(node->left, currentNumber, totalSum, MOD);
+    calculateDigitPathSum(node->right, currentNumber, totalSum, MOD);
+}
+
+int sumDigitPath(BTNode* root) {
+    const int MOD = 27022001;
+    long long totalSum = 0;
+    calculateDigitPathSum(root, 0, totalSum, MOD);
+    return totalSum;
+}

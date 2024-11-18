@@ -1,0 +1,17 @@
+// STUDENT ANSWER BEGIN
+// You can define other functions here to help you.
+
+int countTwoChildrenNode() {
+    return countTwoChildrenHelper(this->root);
+}
+
+int countTwoChildrenHelper(Node* node) {
+    if (!node) return 0;
+    int count = 0;
+    if (node->pLeft && node->pRight) {
+        count = 1;
+    }
+    return count + countTwoChildrenHelper(node->pLeft) + countTwoChildrenHelper(node->pRight);
+}
+
+// STUDENT ANSWER END

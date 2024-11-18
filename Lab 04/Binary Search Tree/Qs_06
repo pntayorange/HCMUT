@@ -1,0 +1,17 @@
+int singleChild(BSTNode* root) {
+    // STUDENT ANSWER
+    if (!root) return 0; // Base case: if the tree is empty, return 0.
+
+    int count = 0;
+
+    // Check if the current node has only one child.
+    if ((root->left && !root->right) || (!root->left && root->right)) {
+        count = 1;
+    }
+
+    // Recursively count single children in the left and right subtrees.
+    count += singleChild(root->left);
+    count += singleChild(root->right);
+
+    return count;
+}

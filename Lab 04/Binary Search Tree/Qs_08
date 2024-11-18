@@ -1,0 +1,26 @@
+BSTNode *subtreeWithRange(BSTNode *root, int lo, int hi)
+{
+    // STUDENT ANSWER
+    if (root == nullptr)
+    {
+        return nullptr;
+    }
+
+    // If the root's value is within the range, it's part of the subtree.
+    if (root->val >= lo && root->val <= hi)
+    {
+        root->left = subtreeWithRange(root->left, lo, hi);
+        root->right = subtreeWithRange(root->right, lo, hi);
+        return root;
+    }
+
+    // If the root's value is outside the range, we need to find the appropriate subtree.
+    if (root->val < lo)
+    {
+        return subtreeWithRange(root->right, lo, hi);
+    }
+    else
+    {
+        return subtreeWithRange(root->left, lo, hi);
+    }
+}

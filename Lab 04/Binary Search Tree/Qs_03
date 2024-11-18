@@ -1,0 +1,42 @@
+// STUDENT ANSWER BEGIN
+// You can define other functions here to help you.
+T sumInRange(Node *node, T l, T r)
+{
+    if (!node)
+        return 0;
+
+    // If current node value is in range, include it in the sum
+    if (node->value >= l && node->value <= r)
+        return node->value + sumInRange(node->pLeft, l, r) + sumInRange(node->pRight, l, r);
+
+    // If current node value is less than the range, skip the left subtree
+    if (node->value < l)
+        return sumInRange(node->pRight, l, r);
+
+    // If current node value is greater than the range, skip the right subtree
+    return sumInRange(node->pLeft, l, r);
+}
+
+bool find(T i)
+{
+    // TODO: return true if value i is in the tree; otherwise, return false.
+    Node *curr = root;
+    while (curr)
+    {
+        if (curr->value == i)
+            return true; // Found the value
+        if (i < curr->value)
+            curr = curr->pLeft; // Traverse left
+        else
+            curr = curr->pRight; // Traverse right
+    }
+    return false;
+}
+
+T sum(T l, T r)
+{
+    // TODO: return the sum of all element in the tree has value in range [l,r].
+    return sumInRange(root, l, r); // Helper function for range sum
+}
+
+// STUDENT ANSWER END

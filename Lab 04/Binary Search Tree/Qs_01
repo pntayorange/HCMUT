@@ -1,0 +1,89 @@
+// Helping functions
+Node *deleteHelper(Node *root, T value)
+{
+    if (!root)
+        return root;
+
+    if (value < root->value)
+    {
+        root->pLeft = deleteHelper(root->pLeft, value);
+    }
+    else if (value > root->value)
+    {
+        root->pRight = deleteHelper(root->pRight, value);
+    }
+    else
+    {
+        // Node with only one child or no child
+        if (!root->pLeft)
+        {
+            Node *temp = root->pRight;
+            delete root;
+            return temp;
+        }
+        else if (!root->pRight)
+        {
+            Node *temp = root->pLeft;
+            delete root;
+            return temp;
+        }
+
+        // Node with two children: Get the inorder successor
+        Node *temp = findMin(root->pRight);
+
+        // Copy the inorder successor's value to this node
+        root->value = temp->value;
+
+        // Delete the inorder successor
+        root->pRight = deleteHelper(root->pRight, temp->value);
+    }
+    return root;
+}
+
+Node *findMin(BinarySearchTree<T>::Node *node)
+{
+    while (node->pLeft)
+    {
+        node = node->pLeft;
+    }
+    return node;
+}
+
+void add(T value)
+{
+    // TODO
+    Node *newNode = new Node(value);
+    if (!root)
+    {
+        root = newNode;
+        return;
+    }
+    Node *curr = root;
+    while (true)
+    {
+        if (value <= curr->value)
+        { // Add to left subtree if value <= current value
+            if (!curr->pLeft)
+            {
+                curr->pLeft = newNode;
+                break;
+            }
+            curr = curr->pLeft;
+        }
+        else
+        { // Add to right subtree
+            if (!curr->pRight)
+            {
+                curr->pRight = newNode;
+                break;
+            }
+            curr = curr->pRight;
+        }
+    }
+}
+
+void deleteNode(T value)
+{
+    // TODO
+    root = deleteHelper(root, value);
+}

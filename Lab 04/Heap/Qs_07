@@ -1,0 +1,51 @@
+#include <iostream>
+#include <queue>
+#include <string>
+#include <vector>
+using namespace std;
+
+class PrinterQueue
+{
+    // your attributes
+    struct FileRequest
+    {
+        int priority;
+        string fileName;
+        int order;
+
+        // Custom comparator for the priority queue
+        bool operator<(const FileRequest &other) const
+        {
+            if (priority == other.priority)
+                return order > other.order; // FIFO for same priority
+            return priority < other.priority; // Higher priority first
+        }
+    };
+
+    priority_queue<FileRequest> pq;
+    int orderCount = 0;
+public:
+    // your methods
+
+    void addNewRequest(int priority, string fileName)
+    {
+        // your code here
+                pq.push({priority, fileName, orderCount++});
+
+    }
+
+    void print()
+    {
+        // your code here
+        // After some logic code, you have to print fileName with endline 
+        if (pq.empty())
+        {
+            cout << "No file to print" << endl;
+        }
+        else
+        {
+            cout << pq.top().fileName << endl;
+            pq.pop();
+        }
+    }
+};
