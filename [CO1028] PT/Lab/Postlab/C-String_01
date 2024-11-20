@@ -1,0 +1,43 @@
+bool isLetter(char c)
+{
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+void process(const char str[], char outstr[])
+{
+    int count = 0;
+    bool isFirstChar = true;
+
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        char currentChar = str[i];
+
+        if (isLetter(currentChar))
+        {
+            if (isFirstChar)
+            {
+                outstr[count++] = toupper(currentChar);
+                isFirstChar = false;
+            }
+            else
+            {
+                outstr[count++] = tolower(currentChar);
+            }
+        }
+        else if (currentChar == ' ')
+        {
+            isFirstChar = true;
+            if (count > 0 && outstr[count - 1] != ' ')
+            {
+                outstr[count++] = ' ';
+            }
+        }
+    }
+
+    while (count > 0 && outstr[count - 1] == ' ')
+    {
+        count--;
+    }
+
+    outstr[count] = '\0';
+}

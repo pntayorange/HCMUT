@@ -1,0 +1,17 @@
+void deleteWord(string s, string s1){
+   for (int i=s.length();i>=0;i--)
+   {
+    if (s[i]==s1[0])
+    {   int count=0;
+        for (int j=0;j<s1.length();j++)
+        {
+            if (s[i+j]==s1[j]) count++;
+        }
+        if (count == s1.length())
+        {
+            s.erase(i, s1.length());
+        }
+    }
+   }
+   cout <<s<<endl;
+}

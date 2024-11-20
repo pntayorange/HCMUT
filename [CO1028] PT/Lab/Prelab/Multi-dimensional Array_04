@@ -1,0 +1,19 @@
+int diagonalDiff(int arr[][1000], int row, int col, int x, int y) 
+{
+    int mai[row+col-1], sub[row+col-1];
+    for (int i=0;i<row+col-1;i++)
+    {
+        mai[i]=0;
+        sub[i]=0;
+    }
+    for (int i=0;i<row;i++)
+    {
+        for (int j=0;j<col;j++)
+        {
+            mai[col-1+(i-j)]+=arr[i][j];
+            sub[i+j]+= arr[i][j];
+        }
+    }
+    int a= ((mai[col-1+(x-y)]-sub[x+y]) >=0)? (mai[col-1+(x-y)]-sub[x+y]) :(- (mai[col-1+(x-y)]-sub[x+y]));
+    return a;
+}

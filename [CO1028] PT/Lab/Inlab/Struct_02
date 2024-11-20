@@ -1,0 +1,20 @@
+string convertToString(SCP obj) {
+    string all="";
+    all+="Item #: SCP-";
+    if (obj.id <10) all+="00" + to_string(obj.id);
+    else if (obj.id <100) all+="0" + to_string(obj.id);
+         else all+=to_string(obj.id); all+="\n";
+    all+="Object Class:";
+    if (obj.objClass ==0) all +=" Safe\n";
+    else if (obj.objClass ==1) all +=" Euclid\n";
+        else if (obj.objClass ==2) all +=" Keter\n";
+    all+="Special Containment Procedures: ";
+    all+=obj.speConProcedures+"\n";
+    all+="Description: " +obj.description+"\n";
+    for (int i=0;i<obj.numAddendums; i++)
+    {
+        all+=obj.addendums[i]+"\n";
+    }
+ 
+    return all;
+}

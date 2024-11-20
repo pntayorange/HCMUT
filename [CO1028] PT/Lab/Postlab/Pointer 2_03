@@ -1,0 +1,40 @@
+bool deleteCol(int **&matrix, int r, int c, int col)
+{
+    if (c == 1)
+    {
+        for (int i = 0; i < r; ++i)
+        {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+        matrix = nullptr;
+        return true;
+    }
+
+    int **newMatrix = new int *[r];
+    for (int i = 0; i < r; ++i)
+    {
+        newMatrix[i] = new int[c - 1];
+    }
+
+    for (int i = 0; i < r; ++i)
+    {
+        int newColIndex = 0;
+        for (int j = 0; j < c; ++j)
+        {
+            if (j == col)
+                continue;
+            newMatrix[i][newColIndex++] = matrix[i][j];
+        }
+    }
+
+    for (int i = 0; i < r; ++i)
+    {
+        delete[] matrix[i];
+    }
+    delete[] matrix;
+
+    matrix = newMatrix;
+
+    return true;
+}

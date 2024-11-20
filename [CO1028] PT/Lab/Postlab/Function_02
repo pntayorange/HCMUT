@@ -1,0 +1,10 @@
+int convertToBaseM(int n, int m = 2) {
+     
+    if (n==0) return 0;
+     
+        return n%m + convertToBaseM(n/m,m)*10;
+    
+    
+     
+     
+}

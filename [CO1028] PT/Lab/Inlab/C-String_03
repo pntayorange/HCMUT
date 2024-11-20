@@ -1,0 +1,24 @@
+
+
+void process(char str[], char outstr[]) {
+    int begin_str = 0, end_str = strlen(str) - 1;
+    
+    while (str[begin_str] == ' ')
+        begin_str++;
+
+    while (end_str >= 0 && str[end_str] == ' ')
+        end_str--;
+
+    if (begin_str > end_str) {
+        outstr[0] = '\0';
+        return;
+    }
+
+    int index = 0;
+    for (int i = begin_str; i <= end_str; i++) {
+        if (str[i] != ' ' || (i > begin_str && str[i - 1] != ' ')) {
+            outstr[index++] = str[i];
+        }
+    }
+    outstr[index] = '\0';
+}

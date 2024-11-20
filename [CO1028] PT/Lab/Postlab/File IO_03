@@ -1,0 +1,79 @@
+//* This code miss hidden testcase. 
+#include <vector> 
+#include <sstream>
+int s2i(string str)
+{
+    istringstream iss(str);
+    int num;
+    iss >> num;
+    return num;
+}
+void manage(string library, string book, string author)
+{
+    int y;
+    ifstream l(library);
+    l >> y;
+    string L_Name[y];
+    int L_Book[y][5];
+    for (int i = 0; i < y; i++)
+    {
+        l >> L_Name[i];
+        for (int j = 0; j < 5; j++)
+            l >> L_Book[i][j];
+    }
+    l.close();
+    ifstream a(author);
+    int n;
+    a >> n;
+    string m;
+    vector<vector<string>> Author;
+    vector<string> Au;
+    bool tf = false;
+    while (a >> m)
+    {
+
+        if (int(m[0]) >= 65)
+        {
+            if (tf)
+            {
+                Author.push_back(Au);
+                Au.clear();
+            }
+            tf = true;
+        }
+        Au.push_back(m);
+    }
+    a.close();
+    
+    string input1, input2; cin >> input1 >> input2;
+    int L_index = -1;
+    for (int i = 0; i < y; i++)
+    {
+        if (L_Name[i] == input1)
+        {
+            L_index = i;
+            break;
+        }
+    }
+    int Au_index = -1;
+    for (int i = 0; i < Author.size(); i++)
+    {
+        if (Author[i][0] == input2)
+        {
+            Au_index = i;
+            break;
+        }
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 1; j < Author[Au_index].size(); j++)
+        {
+            if (L_Book[L_index][i] == s2i(Author[Au_index][j]))
+            {
+                cout << "True";
+                return;
+            }
+        }
+    }
+    cout << "False";
+}

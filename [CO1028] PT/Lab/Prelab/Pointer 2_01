@@ -1,0 +1,13 @@
+int* zeros(int n) {
+    int* arr = (int*)malloc(n * sizeof(int));
+    
+    if (arr == NULL || n==0) {
+        return nullptr;
+    }
+    
+    for (int i = 0; i < n; i++) {
+        arr[i] = 0;
+    }
+    
+    return arr;
+}

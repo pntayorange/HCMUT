@@ -1,0 +1,8 @@
+#include <cstring>
+bool isPalindrome(const char* str) {
+    for (int i=0;i<strlen(str)/2;i++)
+    {
+        if (str[i]!=str[strlen(str)-1-i]) return false;
+    }
+    return true;
+}

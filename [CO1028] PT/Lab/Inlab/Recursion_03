@@ -1,0 +1,39 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+//bool palindrome(string strg);
+bool palindromeRecursion(string s)
+{
+    if (s.length() <= 1){
+        cout <<"true true\n";
+        return true;
+    }
+        
+
+    if (s[0] != s[s.length() - 1])
+    {
+        cout <<"false false\n";
+         return false;
+    }
+       
+
+    return palindromeRecursion(s.substr(1, s.length() - 2));
+}
+
+int main()
+{
+    string input;
+
+    while (getline(cin, input)) {
+        
+
+        if (input[0] == '*') //Vòng lặp sẽ chấm dứt khi người sử dụng đọc vào một chuỗi bắt đầu bằng *.
+            break;
+
+        //palindrome(input);
+        palindromeRecursion(input);
+    }
+
+    return 0;
+}

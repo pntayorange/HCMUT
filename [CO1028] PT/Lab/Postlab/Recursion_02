@@ -1,0 +1,14 @@
+//* Your code failed one or more hidden tests.
+int countWaysUtil(int x, int currNum) {
+    if (x == 0) {
+        return 1;
+    }
+    if (x < 0 || currNum <= 0) {
+        return 0;
+    }
+    return countWaysUtil(x - currNum * currNum, currNum - 1) + countWaysUtil(x, currNum - 1);
+}
+
+int countWaySumOfSquare(int x) {
+    return countWaysUtil(x, sqrt(x));
+}

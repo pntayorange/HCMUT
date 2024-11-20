@@ -1,0 +1,25 @@
+void process(string fileName)   {
+    ifstream f(fileName);
+    int a,b;
+    f >>a>>b;
+    
+    double M[a][b];
+    for (int i=0;i<a;i++)
+    {
+        for (int j=0;j<b;j++)
+        {
+            f>>M[i][j];
+        }
+    }
+    double mr[a], ma=M[0][0];
+     for (int i=0;i<a;i++)
+    {   mr[i]=M[i][0];
+        for (int j=0;j<b;j++)
+        {
+            if(mr[i]<M[i][j]) mr[i]=M[i][j];
+        }
+        if (ma<mr[i]) ma=mr[i];
+    }
+    for (int i=0;i<a;i++) cout <<mr[i]<<" ";
+    cout <<ma;
+}

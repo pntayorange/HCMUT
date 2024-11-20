@@ -1,0 +1,10 @@
+void recover(char abc[]) {
+    int abc_size=strlen(abc);
+    for (int i=0;i<abc_size;i++)
+    {
+        int a= int (abc[i]);
+        if (65<= a && a <=90) abc[i]= abc[i] + 32;
+        else if (97<= a && a <=122) abc[i]= abc[i] - 32;
+    }
+    
+}

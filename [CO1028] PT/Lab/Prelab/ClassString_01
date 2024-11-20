@@ -1,0 +1,7 @@
+void cutString(string s, int index){
+   if (0<= index && index < s.length()) 
+    {  s=s.substr(index);
+     cout <<s;}
+     
+    
+}

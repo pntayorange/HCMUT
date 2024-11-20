@@ -1,0 +1,70 @@
+#include <vector>
+#include <sstream>
+int s2i(string str) {
+    istringstream iss(str);
+    int num;
+    iss >> num ;
+    return num;
+}
+void calMoney(string price, string buy)
+{
+    ifstream p(price);
+    int n;
+    p>>n;
+    int Id[n], P[n];
+    int count=0;
+    while (p>>Id[count]>>P[count]) count++;
+    p.close();
+    //completed file Price
+    ifstream b(buy);
+    int m;
+    b>>m;
+    string a;
+    vector <vector <string> >s;
+    vector <string> str;
+    bool tf=false;
+   while (b>>a)
+    {
+         
+        if (int (a[0]) >= 65 && int (a[0]) <=90) 
+        {
+            if (tf) 
+            {
+                s.push_back(str);
+            str.clear();
+            
+            }
+            tf=true;
+        }
+        str.push_back(a);
+       
+    }
+    
+  s.push_back(str);
+  int sum[m]={0};
+  for (int i=0;i<s.size();i++)
+  {
+      for (int j=1;j<s[i].size();j+=2)
+      {
+          sum[i]+=P[s2i(s[i][j])-1]*s2i(s[i][j+1]);
+          //cout <<P[s2i(s[i][j])-1]<<" "<<s2i(s[i][j+1])<<endl;
+      }
+  }
+  
+  //  for (int i=0;i<s.size();i++)
+  //  {
+  //    for (int j=0;j<s[i].size();j++)
+  //    {
+  //        cout <<s[i][j]<<" ";
+  //    }
+  //    cout <<endl;
+  //     //cout <<s[i]<<" "<<sum[count];
+  //     //count++;
+  //  }
+  //  //cout <<"-"<<s[0][1]<<"-";
+    for (int j=0;j<m;j++)
+      {
+          cout <<s[j][0]<<" "<<sum[j]<<endl;
+      }
+      
+}

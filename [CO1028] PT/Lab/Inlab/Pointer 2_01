@@ -1,0 +1,25 @@
+int **readArray()
+{
+    int **matrix = new int *[10];
+    for (int i = 0; i < 10; ++i)
+    {
+        matrix[i] = new int[10];
+    }
+
+    for (int i = 0; i < 10; ++i)
+    {
+        for (int j = 0; j < 10; ++j)
+        {
+            cin >> matrix[i][j];
+            if (matrix[i][j] == 0)
+            {
+                for (int k=0; k+j<10; ++k) matrix[i][j+k] = 0;
+                j=10;
+            }
+            
+        }
+    }
+
+    
+    return matrix;
+}

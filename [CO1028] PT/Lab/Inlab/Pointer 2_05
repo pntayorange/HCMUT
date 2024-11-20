@@ -1,0 +1,28 @@
+int** transposeMatrix(int** matrix, int r, int c) {
+    if (r == 0 || c==0) return NULL;
+    int **M = new int*[c];
+    for (int i=0;i<c;i++)
+    {
+         M[i]=new int[r];
+    }
+    int * subM= new int[r*c];
+    int count=0;
+    for (int i=0;i<r;i++)
+    {
+        for (int j=0;j<c;j++)
+        {
+            subM[count]=matrix[i][j];
+            count++;
+        }
+    }
+    count=0;
+    for (int i=0;i<r;i++)
+    {
+        for (int j=0;j<c;j++)
+        {
+            M[j][i]=subM[count];
+            count++;
+            }
+    }
+    return M;
+}

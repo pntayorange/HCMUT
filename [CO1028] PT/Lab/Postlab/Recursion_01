@@ -1,0 +1,6 @@
+int findOccurrences(int nums[], int size, int element) {
+    if (size ==0) return 0;
+    if (element == nums[size-1])
+    return 1+findOccurrences(nums, size-1, element);
+    return findOccurrences(nums, size-1, element);
+}

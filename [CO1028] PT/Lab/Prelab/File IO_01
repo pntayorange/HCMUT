@@ -1,0 +1,14 @@
+void calSum(string fileName)   {
+  ifstream file(fileName);
+
+    int a=0,sum=0;
+
+    while (file)     
+    {
+        file >> a;
+        sum+=a;
+    }
+     cout <<sum-a;
+    file.close();
+   
+}

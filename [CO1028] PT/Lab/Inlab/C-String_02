@@ -1,0 +1,25 @@
+bool isRepeated(const char* word, const char* arr[], int size) {
+    for (int i = 0; i < size; ++i) {
+        if (strcmp(word, arr[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void printFirstRepeatedWord(char str[]) {
+    const char* words[100];
+    int count = 0;
+
+    char* token = strtok(str, " ");
+    while (token != nullptr) {
+        if (isRepeated(token, words, count)) {
+            cout << token;
+            return;
+        }
+        words[count++] = token;
+        token = strtok(nullptr, " ");
+    }
+
+    cout << "No Repetition";
+}

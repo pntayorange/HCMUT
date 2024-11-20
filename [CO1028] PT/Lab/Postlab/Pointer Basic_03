@@ -1,0 +1,9 @@
+bool isSymmetry(int *head, int *tail)
+{
+    
+    // cout <<head<<" "<<tail<<endl;
+    if (*head != *tail)
+        return false;
+    if (head < tail) return isSymmetry((head + 1), (tail - 1));
+    return true;
+}

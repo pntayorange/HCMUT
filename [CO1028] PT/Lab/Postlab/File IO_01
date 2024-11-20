@@ -1,0 +1,30 @@
+void studentGrading(string fileName)   {
+    ifstream f(fileName);
+    int N; 
+    f>>N;
+    double NMDT[N], KTLT[N], DSA[N],PPL[N];
+    int count=0;
+    for (int i=0;i<N;i++)
+    {
+        f>> NMDT[count];
+        f>> KTLT[count];
+        f>> DSA[count];
+        f>> PPL[count];
+        count++;
+    }
+    f.close();
+    int A=0,B=0,C=0,D=0;
+    for (int i=0;i<N;i++)
+    {
+        if ( (NMDT[i]<5 ) || (KTLT[i]<5) ||( DSA[i]<5) || (PPL[i]<5)  ) D++;
+        else if ((NMDT[i]+KTLT[i]+DSA[i]+PPL[i])/4 >=8) A++;
+        else if ((NMDT[i]+KTLT[i]+DSA[i]+PPL[i])/4 >=6.5) B++;
+        else C++;
+    }
+    cout <<"A "<<A<<endl;
+    cout <<"B "<<B<<endl;
+    cout <<"C "<<C<<endl;
+    cout <<"D "<<D<<endl;
+    
+    
+}

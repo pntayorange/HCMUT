@@ -1,0 +1,24 @@
+void insertRow(int **&matrix, int r, int c, int *rowArr, int row)
+{
+    if (row == r)
+    {
+        matrix[row] = new int[c];
+        for (int i = 0; i < c; i++)
+            matrix[row][i] = rowArr[i];
+    }
+    else
+    {
+        matrix[r] = new int[c];
+        for (int i = r; i > row; i--)
+        {
+            for (int j = 0; j < c; j++)
+            {
+                matrix[i][j] = matrix[i - 1][j];
+            }
+        }
+        for (int i = 0; i < c; i++)
+        {
+            matrix[row][i] = rowArr[i];
+        }
+    }
+}
