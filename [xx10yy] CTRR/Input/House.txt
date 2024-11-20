@@ -1,0 +1,212 @@
+
+struct Edge
+{
+    int from, to, value;
+};
+
+struct Graph
+{
+    int V, E;
+    struct Edge *edge;
+};
+
+struct Graph *createGraph(int V, int E)
+{
+    struct Graph *graph = new Graph;
+    graph->V = V;
+    graph->E = E;
+    graph->edge = new Edge[E];
+    return graph;
+}
+
+/*
+void BellmanFord(struct Graph *graph, int original, int *BFValue, int *BFPrev)
+{
+    // cout << "\n===============NEW NEW NEW=================\n";
+    int V = graph->V; // int dis[V];
+    int E = graph->E; // int prev[V];
+
+    // cout << "STEP:  " << Step << endl;
+    //  Step 1: Initialize disances from from to all other
+    //  vertices as INFINITE
+    for (int i = 0; i < V; i++)
+    {
+        BFValue[i] = INT_MAX;
+        BFPrev[i] = -1;
+    }
+    BFValue[original] = 0;
+    // Step 2: Relax all edges |V| - 1 times. A simple
+    // shortest path from from to any other vertex can have
+    // at-most |V| - 1 edges
+    // for (int i = 0; i < V; i++)
+    //     cout << BFValue[i] << " ";
+    // cout << endl;
+    // for (int i = 0; i < V; i++)
+    //     cout << BFPrev[i] << " ";
+    // cout << endl;
+    for (int i = 1; i <= V - 1; i++)
+    {
+        for (int j = 0; j < E; j++)
+        {
+            // cout <<"EDGE: "<<j<<" : "<< graph->edge[j].value<<endl;
+            int u = graph->edge[j].from;
+            int v = graph->edge[j].to;
+            int val = graph->edge[j].value;
+            if (BFValue[u] != INT_MAX && BFValue[u] + val < BFValue[v] && Visited[u] ==-1)
+            {
+                BFValue[v] = BFValue[u] + val;
+                BFPrev[v] = u;
+                // cout <<"BFVAlue"<<" "<<v<<": "<<BFValue[v]<<endl;
+            }
+        }
+        Visited[v] = true;
+        if (i >= Step)
+        {
+            return;
+        }
+    }
+
+    // Step 3: check for negative-value cycles.  The above step guarantees shortest disances if graph doesn't
+    // contain negative value cycle.  If we get a shorter path, then there is a cycle.
+    // for (int i = 0; i < E; i++)
+    //{
+    //    int u = graph->edge[i].from;
+    //    int v = graph->edge[i].to;
+    //    int val = graph->edge[i].value;
+    //    //  if (dis[u] != INT_MAX && dis[u] + value < dis[v])
+    //  {
+    //      printf("Graph contains negative value cycle");
+    //      return; // If negative cycle is detected, simply retune
+    //  }
+    //}
+}
+*/
+void BellmanFord2(struct Graph *graph, int original, int *BFValue, int *BFPrev)
+{
+    // cout << "\n===============NEW NEW NEW=================\n";
+    int V = graph->V; // int dis[V];
+    int E = graph->E; // int prev[V];
+
+    // cout << "STEP:  " << Step << endl;
+    //  Step 1: Initialize disances from from to all other
+    //  vertices as INFINITE
+    for (int i = 0; i < V; i++)
+    {
+        BFValue[i] = INT_MAX;
+        BFPrev[i] = -1;
+    }
+    BFValue[original] = 0;
+    // Step 2: Relax all edges |V| - 1 times. A simple
+    // shortest path from from to any other vertex can have
+    // at-most |V| - 1 edges
+    // for (int i = 0; i < V; i++)
+    //     cout << BFValue[i] << " ";
+    // cout << endl;
+    // for (int i = 0; i < V; i++)
+    //     cout << BFPrev[i] << " ";
+    // cout << endl;
+    for (int i = 1; i <= V - 1; i++)
+    {
+        for (int j = 0; j < E; j++)
+        {
+            // cout <<"EDGE: "<<j<<" : "<< graph->edge[j].value<<endl;
+            int u = graph->edge[j].from;
+            int v = graph->edge[j].to;
+            int val = graph->edge[j].value;
+            if (BFValue[u] != INT_MAX && BFValue[u] + val < BFValue[v] && Visited[u] ==-1)
+            {
+                BFValue[v] = BFValue[u] + val;
+                BFPrev[v] = u;
+                // cout <<"BFVAlue"<<" "<<v<<": "<<BFValue[v]<<endl;
+            }
+        }
+        Visited[v] = true;
+        if (i >= Step)
+        {
+            return;
+        }
+    }
+}
+void Bellman(struct Graph *graph, int original, int *BFValue, int *BFPrev)
+{
+    int V=graph->V;
+    int E=graph->E;
+
+    for (int i=0;i<V;i++)
+    {
+        for (int j=0)
+    }
+
+}
+int EdgeCount(int Matrix[][20], int Matrix_size)
+{
+    int edgeCount = 0;
+    for (int i = 0; i < Matrix_size; i++)
+    {
+
+        for (int j = 0; j < Matrix_size; j++)
+        {
+            if (Matrix[i][j] != 0)
+                edgeCount++;
+        }
+    }
+    return edgeCount;
+}
+
+void BF(int Matrix[][20], int ver_num, char origi, int *BFValue, int *BFPrev)
+{
+    //if (Step++ >= ver_num)
+    //    Step = 1;
+    // int edge_num = EdgeCount(Matrix, ver_num);
+    // struct Graph *graph = createGraph(ver_num, edge_num);
+    // int edge_th = 0;
+    // for (int i = 0; i < ver_num; i++)
+    //{
+    //     for (int j = 0; j < ver_num; j++)
+    //     {
+    //         if (Matrix[i][j] != 0)
+    //         {
+    //             graph->edge[edge_th].from = i;
+    //             graph->edge[edge_th].to = j;
+    //             graph->edge[edge_th].value = Matrix[i][j];
+    //             edge_th++;
+    //         }
+    //     }
+    // }
+
+    //for (int i = 0; i < ver_num; i++)
+    //{
+    //    BFValue[i] = INT_MAX;
+    //    BFPrev[i] = -1;
+    //}
+    //BFValue[(int)origi - 65] = 0;
+    // cout << BFValue[(int)origi - 65] << endl;
+    //* Có thể giữa như cũ vì testcase trên web bị lỗi
+    //for (int i = 1; i <= ver_num - 1; i++)
+    //{
+    //    for (int j = 0; j < ver_num; j++)
+    //    {
+    //        for (int k = 0; k < ver_num; k++)
+    //        {
+    //            if (BFValue[j] != INT_MAX && BFValue[j] + Matrix[j][k] < BFValue[k] && BFValue[k] != 0)
+    //            {
+    //                BFValue[k] = BFValue[j] + Matrix[j][k];
+    //                BFPrev[k] = j;
+    //                // cout <<"BFVAlue"<<" "<<v<<": "<<BFValue[v]<<endl;
+    //            }
+    //            //}
+    //        }
+    //        if (i >= Step)
+    //        {
+    //            return;
+    //        }
+    //    }
+    //}
+     BellmanFord(graph, (int)origi - 65, BFValue, BFPrev);
+
+    // BFValue[1]=123456789;
+    // cout <<" ------------------------------------------------"<<endl;
+}
+//** Sử dụng công thức truy hồi thì sao ta? 
+// ** Nếu origi có đỉnh nối thì truyền đỉnh nối vào BF (original) để truy hồi tiếp?
+*/
