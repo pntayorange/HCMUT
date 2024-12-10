@@ -1,0 +1,23 @@
+// ==== Code Cau 4: Start =====
+template<class T>
+string DGraph<T>::shape() {
+    //TODO: return the string with format: [Vertices: <numOfVertex>, Edges: <numOfEdge>]
+    return "[Vertices: " +  to_string(this->countVertex) + ", Edges: " + to_string(this->countEdge) + "]";
+}
+
+template<class T>
+bool DGraph<T>::empty() {
+    //TODO: return if graph is empty (it doesn't have any vertex and edge)
+    return countVertex == 0;
+}
+
+template<class T>
+void DGraph<T>::clear() {
+    //TODO: remove all edges and vertices of graph.
+    while (this->nodeList != nullptr) {
+        this->removeVertex(this->nodeList->vertex);
+    }
+    countEdge = 0;
+    countVertex = 0;
+}
+// ==== Code Cau 4: End =====

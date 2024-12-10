@@ -1,0 +1,25 @@
+    // ===== Code Cau 6: Start =====
+    void helpDFS(int v, bool* visited, Adjacency* res, int& size) {
+        if (size == V) 
+            return;
+        if (!visited[v]) {
+            visited[v] = true;
+            size++;
+            res->push(v);
+        }
+        for (int i = 0; i < adj[v].getSize(); ++i) {
+            int a = adj[v].getElement(i);
+            if (!visited[a]) helpDFS(a, visited, res, size);
+        }
+    }
+
+    Adjacency *DFS(int v) // Code Cau 6
+    {
+        // v is a vertex we start DFS
+        Adjacency* res = new Adjacency();
+        bool* visited = new bool[this->V]{false};
+        int size = 0;
+        helpDFS(v, visited, res, size);
+        return res;
+    }
+    // ===== Code Cau 6: End =====

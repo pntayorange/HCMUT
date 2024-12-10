@@ -1,0 +1,23 @@
+Node* rotateRight(Node* root) {
+    //TODO: Rotate and return new root after rotate
+    Node* newRoot = root->pLeft;
+    Node* temp = newRoot->pRight;
+
+    // Perform rotation
+    newRoot->pRight = root;
+    root->pLeft = temp;
+
+    return newRoot;
+}
+
+Node* rotateLeft(Node* root) {
+    //TODO: Rotate and return new root after rotate
+    Node* newRoot = root->pRight;
+    Node* temp = newRoot->pLeft;
+
+    // Perform rotation
+    newRoot->pLeft = root;
+    root->pRight = temp;
+
+    return newRoot;
+}
