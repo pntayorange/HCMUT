@@ -1,50 +1,29 @@
-// ===== Code Cau 2: Start =====
-template<class T>
-typename DGraph<T>::VertexNode* DGraph<T>::getVertexNode(T vertex) {
-    //TODO: Iterate through the Node list of the graph 
-    //      check if any vertexNode contains vertex. 
-    //      If such a vertexNode exists, return it; otherwise, return nullptr.
-    VertexNode* temp = nodeList;
-    while (temp) {
-        if (temp->vertex == vertex) {
-            return temp;
+// Write your helper functions here
+bool search(int val){
+    //TODO
+    Node* curr = root;
+    Node* last = nullptr;
+
+    while (curr) {
+        last=curr;
+        if (val == curr->val) 
+        {
+            splay(curr);
+            return true;
         }
-        temp = temp->next;
+        if (val < curr->val) {
+            
+            curr = curr->pLeft;
+        } else {
+            
+            curr = curr->pRight;
+        } 
+
     }
-    return nullptr;
+    if (last)
+    {
+        splay(last);
+    }
+    return false;
 }
 
-template<class T>
-void DGraph<T>::add(T vertex) {
-    //TODO: create a new vertexNode with vertex.
-    //TODO: add new vertexNode to the end of Node list of the graph.
-    //TODO: increase the countVertex.
-    VertexNode* newNode = new VertexNode(vertex);
-    countVertex++;
-
-    if (nodeList) {
-        VertexNode* temp = this->nodeList;
-        while (temp->next) {
-            temp = temp->next;
-        }
-        temp->next = newNode;
-    } else {
-        nodeList = newNode;
-    }
-}
-
-template <class T>
-void DGraph<T>::connect(T from, T to, float weight) {
-    //TODO: get vertexNode with "from" and vertexNode with "to".
-    //TODO: If either of the two vertexNode objects does not exist, 
-    //      throw an exception: VertexNotFoundException("Vertex doesn't exist!").
-    //TODO: connect "from" vertexNode to "to" vertexNode. 
-    //      If a new edge is created, increase the countEdge.
-    VertexNode* f = getVertexNode(from);
-    VertexNode* t = getVertexNode(to);
-    if (!(t && f)) {
-        throw VertexNotFoundException("Vertex doesn't exist!");
-    }
-    if (f->connectTo(t, weight)) countEdge++;
-}
-// ===== Code Cau 2: End =====

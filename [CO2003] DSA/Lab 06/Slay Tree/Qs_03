@@ -1,56 +1,49 @@
-// ===== Code Cau 3: Start =====
-template <class T>
-bool DGraph<T>::removeEdge(T from, T to) {
-    //TODO: get vertexNode with "from" and vertexNode with "to".
-    //TODO: If either of the two vertexNode objects does not exist, 
-    //      throw an exception: VertexNotFoundException("Vertex doesn't exist!").
-    //TODO: Delete the edge between the "from" vertexNode and the "to" vertexNode. (use removeTo method)
-    //      If success return true and decrement the countEdge; otherwise, return false; 
-    VertexNode* f = getVertexNode(from);
-    VertexNode* t = getVertexNode(to);
-    if (!(t && f)) {
-        throw VertexNotFoundException("Vertex doesn't exist!");
-    }
-    if (f->removeTo(t)) {
-        countEdge--;
-        return true;
-    }
-    return false;
-}
+// Write your helper functions here
+Node* remove(int val){
+    //TODO
+    if (root == nullptr)
+        return root;
 
-template <class T>
-void DGraph<T>::removeVertex(T removeVertex) {
-    //TODO: get vertexNode with "removeVertex"
-    //TODO: If this vertexNode isn't existed,
-    //      throw an exception: VertexNotFoundException("Vertex doesn't exist!").
-    //TODO: Iterate through all the vertexNode in the graph's Node list. For each vertexNode:
-    //      - Check for an edge from the current vertex to the "removeVertex". 
-    //      If such an edge exists, delete it (use removeTo method) and decrement the countEdge. 
-    //      - Check for an edge from the "removeVertex" to the current vertex. 
-    //      If such an edge exists, delete it (use removeTo method) and decrement the countEdge.
-    //TODO: Delete the vertexNode containing removeVertex from the Node list of the graph
-    //      Decrement the countVertex.
-    VertexNode* delVertex = getVertexNode(removeVertex);
-    if (!delVertex) throw VertexNotFoundException("Vertex doesn't exist!");
-    
-    VertexNode* temp = this->nodeList;
-    while (temp) {
-        if (temp->removeTo(delVertex)) countEdge--;
-        if (delVertex->removeTo(temp)) countEdge--;
-        temp = temp->next;
+    if (!search(val)) {
+        return nullptr;
+    }
+    //3. If new root's value is not equal to val, return NULL as val is not present.
+
+    if (root->val != val) {
+        return nullptr;
     }
 
-    temp = this->nodeList;
-    VertexNode* prev = nullptr;
-    while (temp) {
-        if (temp->vertex == delVertex->vertex) {
-            if (prev) prev->next = delVertex->next;
-            delete delVertex;
-            countVertex--;
-            return;
+    // Step 4: Perform the removal
+    Node* removedNode = root;
+    Node* leftSubtree = root->pLeft;
+    Node* rightSubtree = root->pRight;
+
+    // Disconnect the root from its children
+    if (leftSubtree) {
+        leftSubtree->pParent = nullptr;
+    }
+    if (rightSubtree) {
+        rightSubtree->pParent = nullptr;
+    }
+
+    if (!leftSubtree) {
+        // If there is no left subtree, the right subtree becomes the new root
+        root = rightSubtree;
+    } else {
+        // Splay the largest node in the left subtree
+        Node* largestNode = leftSubtree;
+        while (largestNode->pRight) {
+            largestNode = largestNode->pRight;
         }
-        prev = temp;
-        temp = temp->next;
+        splay(largestNode);
+
+        // Make the right subtree the right child of the new root (largest node in left subtree)
+        root->pRight = rightSubtree;
+        if (rightSubtree) {
+            rightSubtree->pParent = root;
+        }
     }
+
+    removedNode->pLeft = removedNode->pRight = nullptr;
+    return removedNode;
 }
-// ===== Code Cau 3: End =====
