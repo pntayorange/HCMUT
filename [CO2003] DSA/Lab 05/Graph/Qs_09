@@ -1,64 +1,4 @@
-#include <iostream>
-#include <list>
-#include <vector>
-using namespace std;
-
-class Adjacency
-{
-private:
-	list<int> adjList;
-	int size;
-public:
-	Adjacency() {}
-	Adjacency(int V) {}
-	void push(int data)
-	{
-		adjList.push_back(data);
-		size++;
-	}
-	void print()
-	{
-		for (auto const &i : adjList)
-			cout << " -> " << i;
-	}
-	void printArray()
-	{
-		for (auto const &i : adjList)
-			cout << i << " ";
-	}
-	int getSize() { return adjList.size(); }
-	int getElement(int idx) 
-	{
-		auto it = adjList.begin();
-		advance(it, idx);
-		return *it;
-	}
-};
-
-class Graph {
-
-    int V;
-    Adjacency* adj;
-
-public:
-    Graph(int V){
-        this->V = V;
-        adj = new Adjacency[V];
-    }
-    void addEdge(int v, int w){
-        adj[v].push(w);
-    }
-
-	void printGraph()
-	{
-		for (int v = 0; v < V; ++v)
-		{
-			cout << "\nAdjacency list of vertex " << v << "\nhead ";
-			adj[v].print();
-		}
-	}
-    
-	// ===== Code Cau 9: Start ====
+// ===== Code Cau 9: Start ====
     void helpTop(int v, Adjacency* adj, list<bool>& visited, list<int>& stack) {
         auto item = visited.begin(); advance(item, v);
         *item = true; // set the node as "visited"
@@ -86,17 +26,4 @@ public:
             cout << it << " ";
         }
     }
-};
-
-int main() {
-    Graph g(6);
-    g.addEdge(5, 2);
-    g.addEdge(5, 0);
-    g.addEdge(4, 0);
-    g.addEdge(4, 1);
-    g.addEdge(2, 3);
-    g.addEdge(3, 1);
-
-    g.topologicalSort();
-    return 0;
-}
+    // ===== Code Cau 9: End =====
