@@ -1,0 +1,23 @@
+// STUDENT ANSWER BEGIN
+// You can define other functions here to help you.
+
+T getMin() {
+    //TODO: return the minimum values of nodes in the tree.
+    if (!root) throw runtime_error("Tree is empty");
+    Node* curr = root;
+    while (curr->pLeft) {
+        curr = curr->pLeft; // Traverse to the leftmost node
+    }
+    return curr->value;}
+
+T getMax() {
+    //TODO: return the maximum values of nodes in the tree.
+    if (!root) throw runtime_error("Tree is empty");
+    Node* curr = root;
+    while (curr->pRight) {
+        curr = curr->pRight; // Traverse to the rightmost node
+    }
+    return curr->value;
+}
+
+// STUDENT ANSWER END
